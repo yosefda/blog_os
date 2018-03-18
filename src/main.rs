@@ -1,6 +1,9 @@
 #![feature(lang_items)] // required for defining the panic handler
+#![feature(const_fn)]
 #![no_std] // don't link the Rust standard library
 #![no_main] // disable all Rust-level entry points
+
+mod vga_buffers;
 
 //extern crate rlibc;
 
@@ -16,15 +19,17 @@ static HELLO: &[u8] = b"Hello world!";
 
 #[no_mangle] // don't mangle the name of this function
 pub extern fn _start() -> ! {
-    // VGA buffer is located at address 0xb8000
-    let vga_buffer = 0xb8000 as *const u8 as *mut u8;
+//    // VGA buffer is located at address 0xb8000
+//    let vga_buffer = 0xb8000 as *const u8 as *mut u8;
+//
+//    for (i, &byte) in HELLO.iter().enumerate() {
+//        unsafe {
+//            *vga_buffer.offset(i as isize * 2) = byte;
+//            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
+//        }
+//    }
 
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
-    }
+    vga_buffers::print_something();
 
     loop{}
 }
