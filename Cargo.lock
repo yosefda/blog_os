@@ -1,4 +1,14 @@
 [[package]]
 name = "blog_os"
 version = "0.1.0"
+dependencies = [
+ "volatile 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
+[[package]]
+name = "volatile"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum volatile 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)" = "6633c5250f16598f92b48272265ce9f8179447f702f0ba0cb640c5be6537b0c0"
