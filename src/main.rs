@@ -4,6 +4,7 @@
 #![no_main] // disable all Rust-level entry points
 
 extern crate volatile;
+extern crate rlibc;
 
 mod vga_buffers;
 

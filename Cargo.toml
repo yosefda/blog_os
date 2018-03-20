@@ -5,3 +5,4 @@ authors = ["Yosef da Iry <yosefda@gmail.com>"]
 
 [dependencies]
 volatile = "0.2.3"
+rlibc = "1.0"
