@@ -10,10 +10,9 @@ extern crate spin;
 #[macro_use]
 extern crate lazy_static;
 
+#[macro_use]
+mod vga_buffer;
 
-mod vga_buffers;
-
-//extern crate rlibc;
 
 #[lang = "panic_fmt"] // define a function that should be called on panic
 #[no_mangle]
@@ -23,13 +22,10 @@ pub extern fn rust_begin_panic(_msg: core::fmt::Arguments,
     loop {}
 }
 
-static HELLO: &[u8] = b"Hello world!";
-
 #[no_mangle] // don't mangle the name of this function
 pub extern fn _start() -> ! {
-    use core::fmt::Write;
-    vga_buffers::WRITER.lock().write_str("Hello again").unwrap();
-    write!(vga_buffers::WRITER.lock(), ", some numbers: {} {}", 42, 1.337).unwrap();
+    println!("Hello world!");
+    println!("Some numbers: {} {}", 42, 1.337);
 
     loop {}
 }
