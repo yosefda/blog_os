@@ -6,3 +6,8 @@ authors = ["Yosef da Iry <yosefda@gmail.com>"]
 [dependencies]
 volatile = "0.2.3"
 rlibc = "1.0"
+spin = "0.4.6"
+
+[dependencies.lazy_static]
+version = "1.0"
+features = ["spin_no_std"]

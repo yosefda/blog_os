@@ -5,6 +5,11 @@
 
 extern crate volatile;
 extern crate rlibc;
+extern crate spin;
+
+#[macro_use]
+extern crate lazy_static;
+
 
 mod vga_buffers;
 
@@ -22,17 +27,9 @@ static HELLO: &[u8] = b"Hello world!";
 
 #[no_mangle] // don't mangle the name of this function
 pub extern fn _start() -> ! {
-//    // VGA buffer is located at address 0xb8000
-//    let vga_buffer = 0xb8000 as *const u8 as *mut u8;
-//
-//    for (i, &byte) in HELLO.iter().enumerate() {
-//        unsafe {
-//            *vga_buffer.offset(i as isize * 2) = byte;
-//            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-//        }
-//    }
+    use core::fmt::Write;
+    vga_buffers::WRITER.lock().write_str("Hello again").unwrap();
+    write!(vga_buffers::WRITER.lock(), ", some numbers: {} {}", 42, 1.337).unwrap();
 
-    vga_buffers::print_something();
-
-    loop{}
+    loop {}
 }
